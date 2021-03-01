@@ -16,13 +16,19 @@
   font-display: swap;
 }
 
+:root {
+  --blue: #00adb5;
+  --gray: #222831;
+  --white: rgb(230, 230, 230);
+}
+
 html {
   font-size: 16px;
 }
 
 body {
-  background-color: #222831;
-  color: rgb(230, 230, 230);
+  background-color: var(--gray);
+  color: var(--white);
   font-size: 1.5em;
   font-family: 'rubik', sans-serif;
 }
@@ -34,7 +40,7 @@ h3 {
 }
 
 a {
-  color: #00adb5;
+  color: var(--blue);
   text-decoration: none;
 }
 a:hover,
@@ -45,17 +51,38 @@ a:focus {
 header {
   padding: 2em;
 }
-header h1 {
-  margin: 0;
-  color: #00adb5;
+.Logo h1 {
+  margin: 0 0 .25em -2px;
+  color: var(--blue);
   letter-spacing: -.05em;
+  line-height: .7em;
 }
-header p {
-  margin-top: 0;
+.Logo p {
   font-size: .8em;
-  margin-left: .1em;
+  margin: 0;
 }
 
+.Logo {
+  color: inherit;
+}
+
+.Logo,
+.BlogPostList a {
+  display: inline-flex;
+  flex-direction: column;
+  padding: 7px;
+  border: 2px dashed transparent;
+  border-radius: 4px;
+  transition: border-color .25s;
+}
+
+.Logo:hover,
+.Logo:focus,
+.BlogPostList a:hover,
+.BlogPostList a:focus {
+  text-decoration: none;
+  border-color: var(--blue);
+}
 main {
   display: flex;
   flex-direction: column;
@@ -81,11 +108,12 @@ main {
   margin-bottom: 3em;
 }
 .BlogPostList h2 {
-  margin-top: 0;
+  margin: 0 0 .5em;
 }
 
 .BlogPostList p {
-  color: #fff;
+  color: var(--white);
+  margin: 0;
 }
 
 pre {
