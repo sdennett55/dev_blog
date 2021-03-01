@@ -1,9 +1,8 @@
 const fs = require('fs');
 
-function createBlogPostTemplate(content) {
-  let blogPostSkeleton = fs.readFileSync('blogPostSkeleton.html', 'utf8');
-  const result = blogPostSkeleton.replace('<p>bodyContent<p>', content);
-  return result;
+function injectBodyContent(filepath, content) {
+  const template = fs.readFileSync(filepath, 'utf8');
+  return template.replace('{{body_content_do_not_remove}}', content);
 }
 
-module.exports = createBlogPostTemplate;
+module.exports = injectBodyContent;
