@@ -18,8 +18,18 @@
 
 :root {
   --blue: #00adb5;
+  --neonBlue: #00fff5;
   --gray: #222831;
   --white: rgb(230, 230, 230);
+}
+
+::-moz-selection { 
+  background-color: var(--neonBlue);
+  color: var(--gray);
+}
+::selection { 
+  background-color: var(--neonBlue);
+  color: var(--gray); 
 }
 
 html {
@@ -48,22 +58,58 @@ a:focus {
   text-decoration: underline;
 }
 
-header {
-  padding: 2em;
+header,
+main {
+  width: 94vw;
 }
+header {
+  margin: 2em 0;
+  padding-left: 2em;
+  max-width: fit-content;
+}
+
+@media (min-width: 1000px) {
+
+}
+
 .Logo h1 {
-  margin: 0 0 .25em -2px;
+  margin: 0 0 0 -2px;
   color: var(--blue);
   letter-spacing: -.05em;
   line-height: .7em;
 }
-.Logo p {
+.Logo-subtitle {
   font-size: .8em;
   margin: 0;
+  padding: 2px 9px 9px;
+}
+.Logo-subtitle span {
+  color: var(--blue);
 }
 
 .Logo {
   color: inherit;
+}
+
+.Logo-icons {
+  display: flex;
+  margin-left: 9px;
+}
+
+.Logo-iconLink {
+  display: block;
+  color: var(--white);
+  transition: color .25s;
+  margin: 0 .5em 0 0;
+}
+.Logo-iconLink:hover,
+.Logo-iconLink:focus {
+  color: var(--blue);
+}
+
+.Logo-icon {
+  display: block;
+  fill: currentColor;
 }
 
 .Logo,
@@ -87,15 +133,13 @@ main {
   display: flex;
   flex-direction: column;
   justify-content: center;
-  padding: 2em;
+  align-items: center;
+  width: 94vw;
   max-width: 1000px;
   margin: auto;
 }
-
-@media (min-width: 1000px) {
-  main {
-    align-items: center;
-  }
+main li {
+  margin: 1em 0;
 }
 
 .BlogPostList {

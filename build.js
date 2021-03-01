@@ -1,6 +1,6 @@
 const showdown = require('showdown');
 const showdownHighlight = require("showdown-highlight");
-const injectBodyContent = require('./utilities');
+const {injectBodyContent} = require('./utilities');
 const converter = new showdown.Converter({
   noHeaderId: true,
   extensions: [showdownHighlight]

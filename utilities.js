@@ -5,4 +5,4 @@ function injectBodyContent(filepath, content) {
   return template.replace('{{body_content_do_not_remove}}', content);
 }
 
-module.exports = injectBodyContent;
+module.exports = {injectBodyContent};
