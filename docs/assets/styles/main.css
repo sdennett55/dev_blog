@@ -1,0 +1,157 @@
+@font-face {
+  font-family: 'karlabold';
+  src: url('../fonts/') format('woff2'),
+       url('../fonts/karla-bold-webfont.woff') format('woff');
+  font-weight: normal;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'rubik';
+  src: url('../fonts/rubik-regular-webfont.woff2') format('woff2'),
+       url('../fonts/rubik-regular-webfont.woff') format('woff');
+  font-weight: normal;
+  font-style: normal;
+}
+
+html {
+  font-size: 16px;
+}
+
+body {
+  background-color: #222831;
+  color: rgb(230, 230, 230);
+  font-size: 1.5em;
+  font-family: 'rubik', sans-serif;
+}
+
+h1,
+h2,
+h3 {
+  font-family: 'karlabold';
+}
+
+a {
+  color: #00adb5;
+  text-decoration: none;
+}
+a:hover,
+a:focus {
+  text-decoration: underline;
+}
+
+header {
+  padding: 2em;
+}
+header h1 {
+  margin: 0;
+  color: #00adb5;
+  letter-spacing: -.05em;
+}
+header p {
+  margin-top: 0;
+  font-size: .8em;
+  margin-left: .1em;
+}
+
+main {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: 2em;
+  max-width: 1000px;
+  margin: auto;
+}
+
+@media (min-width: 1000px) {
+  main {
+    align-items: center;
+  }
+}
+
+.BlogPostList {
+  padding: 0;
+  list-style: none;
+  margin: 0;
+}
+
+.BlogPostList li {
+  margin-bottom: 3em;
+}
+.BlogPostList h2 {
+  margin-top: 0;
+}
+
+.BlogPostList p {
+  color: #fff;
+}
+
+pre {
+  margin: 2em 0;
+  max-width: 100%;
+}
+.hljs-comment,
+.hljs-quote {
+  color: #9c9491;
+}
+
+/* Atelier-Forest Red */
+.hljs-variable,
+.hljs-template-variable,
+.hljs-attribute,
+.hljs-tag,
+.hljs-name,
+.hljs-regexp,
+.hljs-link,
+.hljs-name,
+.hljs-selector-id,
+.hljs-selector-class {
+  color: #f22c40;
+}
+
+/* Atelier-Forest Orange */
+.hljs-number,
+.hljs-meta,
+.hljs-built_in,
+.hljs-builtin-name,
+.hljs-literal,
+.hljs-type,
+.hljs-params {
+  color: #df5320;
+}
+
+/* Atelier-Forest Green */
+.hljs-string,
+.hljs-symbol,
+.hljs-bullet {
+  color: #7b9726;
+}
+
+/* Atelier-Forest Blue */
+.hljs-title,
+.hljs-section {
+  color: #407ee7;
+}
+
+/* Atelier-Forest Purple */
+.hljs-keyword,
+.hljs-selector-tag {
+  color: #6666ea;
+}
+
+.hljs {
+  display: block;
+  overflow-x: auto;
+  background: #1b1918;
+  color: #a8a19f;
+  padding: 0.5em;
+  border-radius: 8px
+}
+
+.hljs-emphasis {
+  font-style: italic;
+}
+
+.hljs-strong {
+  font-weight: bold;
+}
