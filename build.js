@@ -26,6 +26,8 @@ function markdownToHTML() {
         const filenameNoExt = filename.split('.')[0];
         const bodyContent = converter.makeHtml(body);
 
+        const header = await fsPromises.readFile('templates/headerTemplate.html', 'utf8');
+
         await removeExistingDirsFromPublic();
 
         fs.mkdir(`docs/${filenameNoExt}`, err => {
@@ -33,7 +35,7 @@ function markdownToHTML() {
             return console.error(`There was an error creating the directory for the blogpost ${filenameNoExt}`, err);
           }
 
-          fs.writeFile(`docs/${filenameNoExt}/index.html`, injectContent('templates/blogPostTemplate.html', bodyContent), err => {
+          fs.writeFile(`docs/${filenameNoExt}/index.html`, injectContent('templates/blogPostTemplate.html', {body: bodyContent, header}), err => {
             if (err) {
               console.error(`There was an error writing to ${filenameNoExt}.html`, err);
             }
@@ -49,7 +51,6 @@ async function removeExistingDirsFromPublic() {
   const dirs = await fsPromises.readdir('docs');
 
   dirs.forEach(dir => {
-    console.log(dir);
     if (dir === 'assets') {
       return;
     }
