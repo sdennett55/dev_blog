@@ -1,8 +1,10 @@
 const fs = require('fs');
 
-function injectBodyContent(filepath, content) {
+function injectContent(filepath, { header, body }) {
   const template = fs.readFileSync(filepath, 'utf8');
-  return template.replace('{{body_content_do_not_remove}}', content);
+  return template
+    .replace('{{body_content_do_not_remove}}', body)
+    .replace('{{header_content_do_not_remove}}', header);
 }
 
-module.exports = {injectBodyContent};
+module.exports = { injectContent };

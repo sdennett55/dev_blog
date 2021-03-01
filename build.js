@@ -1,6 +1,6 @@
 const showdown = require('showdown');
 const showdownHighlight = require("showdown-highlight");
-const {injectBodyContent} = require('./utilities');
+const {injectContent} = require('./utilities');
 const converter = new showdown.Converter({
   noHeaderId: true,
   extensions: [showdownHighlight]
@@ -33,7 +33,7 @@ function markdownToHTML() {
             return console.error(`There was an error creating the directory for the blogpost ${filenameNoExt}`, err);
           }
 
-          fs.writeFile(`docs/${filenameNoExt}/index.html`, injectBodyContent('templates/blogPostTemplate.html', bodyContent), err => {
+          fs.writeFile(`docs/${filenameNoExt}/index.html`, injectContent('templates/blogPostTemplate.html', bodyContent), err => {
             if (err) {
               console.error(`There was an error writing to ${filenameNoExt}.html`, err);
             }
@@ -82,7 +82,7 @@ async function init() {
   }).slice(0, numOfBlogPosts).map(x => x[1]);
 
 
-  const bodyContent = Object.values(sortedPostsData).map(({ title, description, filename }) => {
+  const body = Object.values(sortedPostsData).map(({ title, description, filename }) => {
     return `
       <li>
         <a href="/docs/${filename}">
@@ -93,12 +93,14 @@ async function init() {
     `;
   }).join('');
 
+  const header = await fsPromises.readFile('templates/headerTemplate.html', 'utf8');
+
   // Add content to main index.html file
-  fs.writeFile(`docs/index.html`, injectBodyContent('templates/indexTemplate.html', bodyContent), err => {
+  fs.writeFile(`docs/index.html`, injectContent('templates/indexTemplate.html', {body, header}), err => {
     if (err) {
       console.error(`There was an error writing to ${filenameNoExt}.html`, err);
     }
-  })
+  });
 }
 
 init();
