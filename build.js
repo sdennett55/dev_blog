@@ -85,7 +85,7 @@ async function init() {
 
 
   const body = Object.values(sortedPostsData).map(({ title, description, filename }) => {
-    const path = `/docs/${filename}`
+    const path = process.env.SITE_ENV === 'production' ? `/${filename}` : `/docs/${filename}`
     return `
       <li>
         <a href="${path}">
