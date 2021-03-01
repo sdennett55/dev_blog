@@ -1,9 +1,10 @@
 const showdown = require('showdown');
 const showdownHighlight = require("showdown-highlight");
-const {injectContent} = require('./utilities');
+const {injectContent, formatDate} = require('./utilities');
 const converter = new showdown.Converter({
   noHeaderId: true,
-  extensions: [showdownHighlight]
+  extensions: [showdownHighlight],
+  openLinksInNewWindow: true,
 });
 const fs = require('fs');
 const fm = require('front-matter');
@@ -17,14 +18,14 @@ function markdownToHTML() {
 
     filenames.forEach(filename => {
       fs.readFile(`posts/${filename}`, 'utf8', async (err, data) => {
-        const { body } = fm(data);
+        const { body, attributes: {publishedDate} } = fm(data);
 
         if (err) {
           return console.error(`There was an issue reading the file: ${filename}`, err);
         }
 
         const filenameNoExt = filename.split('.')[0];
-        const bodyContent = converter.makeHtml(body);
+        const bodyContent = converter.makeHtml(body).replace(`</h1>`, `</h1><p><em>Published on ${formatDate(publishedDate)}.</em></p>`);
 
         const header = await fsPromises.readFile('templates/headerTemplate.html', 'utf8');
 

@@ -9,8 +9,8 @@
 
 @font-face {
   font-family: 'rubik';
-  src: url('../fonts/rubik-regular-webfont.woff2') format('woff2'),
-       url('../fonts/rubik-regular-webfont.woff') format('woff');
+  src: url('../fonts/rubik-v12-latin-300.woff2') format('woff2'),
+       url('../fonts/rubik-v12-latin-300.woff') format('woff');
   font-weight: normal;
   font-style: normal;
   font-display: swap;
@@ -21,6 +21,7 @@
   --neonBlue: #00fff5;
   --gray: #222831;
   --white: rgb(230, 230, 230);
+  --lineHeight: 1.4;
 }
 
 ::-moz-selection { 
@@ -134,16 +135,51 @@ main {
   justify-content: center;
   align-items: center;
   max-width: 1000px;
-  margin: auto;
+  margin: 0 auto 4em;
 }
 main li {
-  margin: 1em 0;
+  line-height: var(--lineHeight);
+}
+main h1 {
+  line-height: 1;
+  border-left: 5px solid var(--blue);
+  padding-left: 10px;
+  display: inline-block;
+  margin-bottom: 0;
+}
+main h1 + p {
+  margin: 1em 0 2em;
+  font-size: 1rem;
+}
+main p {
+  line-height: var(--lineHeight);
+}
+main strong {
+  font-weight: normal;
+  color: var(--blue);
+}
+main a {
+  text-decoration: underline;
+}
+main a:hover,
+main a:focus {
+  text-decoration: none;
+}
+main code {
+  background: #1b1918;
+  color: var(--blue);
+  padding: 0 0.1em;
+  border-radius: 8px;
+  display: inline-flex;
 }
 
 .BlogPostList {
   padding: 0;
   list-style: none;
   margin: 0;
+}
+.BlogPostList a {
+  text-decoration: none;
 }
 
 .BlogPostList li {
@@ -217,7 +253,7 @@ pre {
   background: #1b1918;
   color: #a8a19f;
   padding: 0.5em;
-  border-radius: 8px
+  border-radius: 8px;
 }
 
 .hljs-emphasis {

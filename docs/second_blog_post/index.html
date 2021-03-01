@@ -29,23 +29,19 @@
 </header>
   <main>
     <div>
-      <h1>Welcome to my awesome blog!</h1>
-<h2>Woah, this is neat. New change!</h2>
+      <h1>SVG Crop - Remove blank space from around any SVG instantly</h1><p><em>Published on March 1, 2021.</em></p>
+<p>Let's start with a standard scenario for web devs. You're working on a web project and need a share icon for users to be able to share your content. You google <strong>"share icon svg"</strong> and choose your favorite icon from one of the many icon libraries out there and copy the SVG code.</p>
+<p>You embed the SVG code into your site, but you notice there's some extra space baked into the SVG. Now it's hard to lay it out precisely, since you need to account for this arbitrary amount of space. So now you take one of the following approaches:</p>
 <ul>
-<li>Banana</li>
-<li>Carrot asdfsdf</li>
-<li>Apple</li>
+<li>Manually maniupulate the values of the viewBox attribute on the <code>&lt;svg&gt;</code></li>
+<li>Pixel push in CSS using negative margins</li>
+<li>Fire up Illustrator, Inkscape or similar vector graphic software to manually manipulate the canvas</li>
 </ul>
-<pre><code class="hljs"><span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">add</span>(<span class="hljs-params">a, b</span>) </span>{
-  <span class="hljs-keyword">return</span> a + b;
-}
-
-<span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">thisOneIsMuchLarger</span>(<span class="hljs-params">{firstArg, secondArg}</span>) </span>{
-  <span class="hljs-built_in">console</span>.log(<span class="hljs-string">&#x27;woahhh&#x27;</span>);
-}
-
-add(<span class="hljs-number">3</span>, <span class="hljs-number">5</span>) <span class="hljs-comment">// 8</span>
-</code></pre>
+<p>In either case, the process requires some sort of manual effort that kicks off a distracting side quest. If only there was an online tool that crops any SVG for you so you can keep making progress on your project.</p>
+<p>Introducing…<a href="https://svgcrop.com" rel="noopener noreferrer" target="_blank">SVG Crop!</a></p>
+<p>Simply upload the SVG file via the input or drag-and-drop interface and instantly download your newly cropped SVG.</p>
+<p>The tool works by finding the dimensions of the SVG contents and manipulating the viewBox of the SVG accordingly. This tool has multiple file support and will download several as a zip file.</p>
+<p>That's it! Feel free to <a href="https://github.com/sdennett55/svg_crop" rel="noopener noreferrer" target="_blank">contribute to the project</a>.</p>
     </div>
   </main>
 </body>
