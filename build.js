@@ -18,7 +18,7 @@ function markdownToHTML() {
 
     filenames.forEach(filename => {
       fs.readFile(`posts/${filename}`, 'utf8', async (err, data) => {
-        const { body, attributes: {publishedDate} } = fm(data);
+        const { body, attributes: {title, description, publishedDate} } = fm(data);
 
         if (err) {
           return console.error(`There was an issue reading the file: ${filename}`, err);
@@ -29,6 +29,11 @@ function markdownToHTML() {
 
         const header = await fsPromises.readFile('templates/headerTemplate.html', 'utf8');
 
+        const meta = `
+          <title>${title}</title>
+          <meta name="Description" content="${description}"></meta>
+        `;
+
         await removeExistingDirsFromPublic();
 
         fs.mkdir(`docs/${filenameNoExt}`, err => {
@@ -36,7 +41,7 @@ function markdownToHTML() {
             return console.error(`There was an error creating the directory for the blogpost ${filenameNoExt}`, err);
           }
 
-          fs.writeFile(`docs/${filenameNoExt}/index.html`, injectContent('templates/blogPostTemplate.html', {body: bodyContent, header}), err => {
+          fs.writeFile(`docs/${filenameNoExt}/index.html`, injectContent('templates/blogPostTemplate.html', {body: bodyContent, header, meta}), err => {
             if (err) {
               console.error(`There was an error writing to ${filenameNoExt}.html`, err);
             }
