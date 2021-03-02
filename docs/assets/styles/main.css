@@ -41,20 +41,28 @@
 
 html {
   font-size: 16px;
+  height: 100%;
 }
 
 body {
-  width: 94vw;
+  display: flex;
+  flex-direction: column;
   margin: 0 auto;
   background-color: var(--gray);
   color: var(--white);
   font-size: 1.5em;
   font-family: 'rubik', sans-serif;
   overflow-y: scroll;
+  min-height: 100%;
+}
+
+.MainContent {
+  width: 94vw;
+  margin: 0 auto;
 }
 
 @media (min-width: 480px) {
-  body {
+  .MainContent {
     width: 90vw;
   }
 }
@@ -124,37 +132,11 @@ header:focus {
         -4px 4px 2px var(--textShadowHoverColor);
 }
 
-.Logo-subtitle {
-  font-size: .8em;
-  margin: 0;
-  padding: 2px 9px 9px;
-}
-.Logo-subtitle span {
-  color: var(--blue);
-}
-
 .Logo {
   color: inherit;
 }
 
-.Logo-icons {
-  display: flex;
-  margin-left: 9px;
-}
-
-.Logo-iconLink {
-  display: block;
-  color: var(--white);
-  transition: color .25s;
-  margin: 0 .5em 0 0;
-}
-.Logo-iconLink:hover,
-.Logo-iconLink:focus {
-  color: var(--blue);
-}
-
-.Logo-icon {
-  display: block;
+.Footer-icon {
   fill: currentColor;
 }
 
@@ -178,7 +160,6 @@ main {
   display: flex;
   flex-direction: column;
   justify-content: center;
-  align-items: center;
   max-width: 1000px;
   margin: 0 auto 4em;
 }
@@ -202,7 +183,7 @@ main p {
 main h2 {
   letter-spacing: -.05em;;
 }
-main strong {
+strong {
   font-weight: normal;
   color: var(--blue);
 }
@@ -225,6 +206,7 @@ main code {
   padding: 0;
   list-style: none;
   margin: 0;
+  align-self: center;
 }
 .BlogPostList a {
   text-decoration: none;
@@ -240,6 +222,33 @@ main code {
 .BlogPostList p {
   color: var(--white);
   margin: 0;
+}
+
+footer {
+  text-align: center;
+  font-size: .7em;
+  margin-top: auto;
+  background-color: #0e1115;
+}
+
+footer p {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.Footer-link {
+  margin: 0 .25em;
+}
+.Footer-link--icon {
+  color: var(--white);
+  margin-left: .5em;
+  transition: color .25s;
+}
+
+.Footer-link--icon:hover,
+.Footer-link--icon:focus {
+  color: var(--blue);
 }
 
 pre {
