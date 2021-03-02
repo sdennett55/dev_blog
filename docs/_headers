@@ -1,10 +1,10 @@
 # Cache fonts forever
-assets/fonts/*
+/assets/fonts/*
   Cache-Control: public
   Cache-Control: max-age=365000000
   Cache-Control: immutable
 
 # Cache images for a week
-assets/images/*
+/assets/images/*
   Cache-Control: public
   Cache-Control: max-age=604800
