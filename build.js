@@ -57,7 +57,7 @@ async function removeExistingDirsFromPublic() {
   const dirs = await fsPromises.readdir('docs');
 
   dirs.forEach(dir => {
-    if (dir === 'assets') {
+    if (dir === 'assets' || dir === 'site.webmanifest') {
       return;
     }
     const rmPromise = fsPromises.rmdir(`docs/${dir}`, { recursive: true }, err => {

@@ -16,11 +16,17 @@
   font-display: swap;
 }
 
+* {
+  box-sizing: border-box;
+}
+
 :root {
   --blue: #00adb5;
   --neonBlue: #00fff5;
   --gray: #222831;
   --white: rgb(230, 230, 230);
+  --textShadowColor: rgb(226 59 181);
+  --textShadowHoverColor: rgb(206 0 255);
   --lineHeight: 1.4;
 }
 
@@ -44,6 +50,7 @@ body {
   color: var(--white);
   font-size: 1.5em;
   font-family: 'rubik', sans-serif;
+  overflow-y: scroll;
 }
 
 @media (min-width: 480px) {
@@ -70,6 +77,14 @@ a:focus {
 header {
   margin: 2em 0;
   max-width: fit-content;
+  transform: skew(8deg, -4deg);
+  transition: transform .25s;
+  will-change: transform;
+}
+
+header:hover,
+header:focus {
+  transform: scale(1.1) skew(5deg, -4deg);
 }
 
 .Logo h1 {
@@ -77,7 +92,38 @@ header {
   color: var(--blue);
   letter-spacing: -.05em;
   line-height: .7em;
+  text-transform: uppercase;
+  font-style: italic;
 }
+.Logo-perfText,
+.Logo-frontendText {
+  transition: text-shadow .25s;
+}
+.Logo-perfText {
+  display: block;
+  color: var(--white);
+  margin-left: -8px;
+  margin-top: 1px;
+  text-shadow: -1px 1px 2px var(--gray),
+        -2px 2px 2px var(--textShadowColor),
+        -3px 3px 2px var(--textShadowColor),
+        -4px 4px 2px var(--textShadowColor);
+}
+.Logo-frontendText {
+  text-shadow: -1px 1px 2px var(--gray),
+        -2px 2px 2px var(--textShadowColor),
+        -3px 3px 2px var(--textShadowColor),
+        -4px 4px 2px var(--textShadowColor);
+}
+
+.Logo:hover .Logo-frontendText,
+.Logo:hover .Logo-perfText {
+  text-shadow: -1px 1px 2px var(--gray),
+        -2px 2px 2px var(--textShadowHoverColor),
+        -3px 3px 2px var(--textShadowHoverColor),
+        -4px 4px 2px var(--textShadowHoverColor);
+}
+
 .Logo-subtitle {
   font-size: .8em;
   margin: 0;
@@ -112,7 +158,6 @@ header {
   fill: currentColor;
 }
 
-.Logo,
 .BlogPostList a {
   display: inline-flex;
   flex-direction: column;
@@ -153,6 +198,9 @@ main h1 + p {
 }
 main p {
   line-height: var(--lineHeight);
+}
+main h2 {
+  letter-spacing: -.05em;;
 }
 main strong {
   font-weight: normal;
