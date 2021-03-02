@@ -8,3 +8,8 @@
 /assets/images/*
   Cache-Control: public
   Cache-Control: max-age=604800
+
+# Cache styles for a week
+/assets/styles/*
+  Cache-Control: public
+  Cache-Control: max-age=604800
