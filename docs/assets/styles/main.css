@@ -171,6 +171,7 @@ main {
 }
 main li {
   line-height: var(--lineHeight);
+  margin-bottom: .5em;
 }
 main h1 {
   line-height: 1;
