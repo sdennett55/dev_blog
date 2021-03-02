@@ -1,4 +1,4 @@
-# Steve Dennett's Personal Blog
+# Frontend Performance Blog
 
 - Run `yarn watch`
 - Run `yarn start`
