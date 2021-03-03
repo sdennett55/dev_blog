@@ -31,7 +31,10 @@ function markdownToHTML() {
 
         const meta = `
           <title>${title}</title>
-          <meta name="Description" content="${description}"></meta>
+          <meta name="Description" content="${description}">
+          <meta property="og:title" content="${title}">
+          <meta property="og:description" content="${description}">
+          <meta property="og:url" content="https://frontendperformance.tech/${filenameNoExt}">
         `;
 
         await removeExistingDirsFromPublic();
