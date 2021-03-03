@@ -177,6 +177,7 @@ main {
   display: flex;
   flex-direction: column;
   justify-content: center;
+  width: 100%;
   max-width: 1000px;
   margin: 0 auto 4em;
   font-size: 1em;
@@ -301,7 +302,6 @@ pre {
   display: inline-flex;
   margin: 1em 0;
   max-width: 100%;
-  white-space: pre-wrap;
 }
 .hljs-comment,
 .hljs-quote {
