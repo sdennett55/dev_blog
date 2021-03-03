@@ -242,6 +242,9 @@ main code {
 .BlogPostList li {
   margin-bottom: 1.5em;
 }
+.BlogPostList li::before {
+  content: none;
+}
 .BlogPostList h2 {
   margin: 0;
   line-height: 1;
