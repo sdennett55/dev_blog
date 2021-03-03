@@ -23,6 +23,7 @@
 :root {
   --blue: #00adb5;
   --neonBlue: #00fff5;
+  --darkBlue: #0e1115;
   --gray: #222831;
   --white: rgb(230, 230, 230);
   --textShadowColor: rgb(226 59 181);
@@ -208,7 +209,8 @@ main a:focus {
   text-decoration: none;
 }
 main code {
-  background: #1b1918;
+  /* background: #1b1918; */
+  background: var(--darkBlue);
   color: var(--blue);
   padding: 0 0.1em;
   border-radius: 8px;
@@ -226,7 +228,7 @@ main code {
 }
 
 .BlogPostList li {
-  margin-bottom: 3em;
+  margin-bottom: 1.5em;
 }
 .BlogPostList h2 {
   margin: 0;
@@ -241,7 +243,7 @@ footer {
   text-align: center;
   font-size: .7em;
   margin-top: auto;
-  background-color: #0e1115;
+  background-color: var(--darkBlue);
 }
 
 footer p {
@@ -264,8 +266,17 @@ footer p {
   color: var(--blue);
 }
 
+blockquote {
+  margin: 0 2em;
+}
+blockquote p {
+  border-left: 4px solid var(--blue);
+  padding-left: 10px;
+}
+
 pre {
-  margin: 2em 0;
+  display: inline-flex;
+  margin: 1em 0;
   max-width: 100%;
 }
 .hljs-comment,
@@ -320,7 +331,8 @@ pre {
 .hljs {
   display: block;
   overflow-x: auto;
-  background: #1b1918;
+  /* background: #1b1918; */
+  background: var(--darkBlue);
   color: #a8a19f;
   padding: 0.5em;
   border-radius: 8px;

@@ -89,6 +89,7 @@ async function init() {
   }).slice(0, numOfBlogPosts).map(x => x[1]);
 
 
+
   const body = Object.values(sortedPostsData).map(({ title, description, filename }) => {
     const path = process.env.SITE_ENV === 'production' ? `/${filename}` : `/docs/${filename}`
     return `
@@ -118,21 +119,20 @@ function getFrontMatterData(posts) {
     const sortedPosts = {};
     const promises = [];
 
-    posts.forEach(async post => {
-      const promise = fsPromises.readFile(`posts/${post}`, 'utf8');
+    for (const post of posts) {
+      const promise = await fsPromises.readFile(`posts/${post}`, 'utf8');
       promises.push({ filename: post.split('.md')[0], data: promise });
-    });
+    }
 
     await Promise.all(promises);
 
-    promises.forEach(async ({ data, filename }, index) => {
-      const content = await data;
+    for (const {data, filename} of promises) {
+      const content = data;
+
       const { attributes: { publishedDate, title, description } } = fm(content);
       sortedPosts[publishedDate] = { title, description, filename };
-      if (index === promises.length - 1) {
-       resolve(sortedPosts);
-      }
-    });
-
+    }
+    
+    resolve(sortedPosts);
   })
 }

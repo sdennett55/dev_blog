@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+          <title>Create a blazing fast static blog and build system</title>
+          <meta name="Description" content="Learn how to create a static site generator for optimal page and developer performance."></meta>
+        
+  <link rel="stylesheet" type="text/css" href="../assets/styles/main.css" />
+  <link rel="shortcut icon" type="image/x-icon" href="../assets/images/favicon.ico" />
+  <link rel="apple-touch-icon" sizes="180x180" href="../assets/images/apple-touch-icon.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="../assets/images/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="../assets/images/favicon-16x16.png">
+  <link rel="manifest" href="../site.webmanifest">
+</head>
+
+<body>
+  <div class="MainContent">
+    <header>
+  <a class="Logo" href="/">
+    <h1><span class="Logo-frontendText">Frontend</span> <span class="Logo-perfText">Performance</span></h1>
+  </a>
+</header>
+    <main>
+      <h1>Create a blazing fast static blog and build system</h1><p><em>Published on March 2, 2021.</em></p>
+<p>Recently, I made my very first blog. It's this one actually, <strong>Frontend Performance</strong>! 🎉</p>
+<p>It has four 100's on <a href="https://web.dev/measure/" rel="noopener noreferrer" target="_blank">web.dev/measure</a> and downloads and parses <code>0kb</code> of JavaScript.</p>
+<p>Before I embarked on my 2-day journey to create my own static build system to generate this blog, I of course considered using an existing blog framework or static site generator.</p>
+<p>Those in the React community like myself might be familiar with the frameworks <strong>Gatsby</strong> and <strong>Next.js</strong> as viable options for a blog. They handle server-side rendering out-of-the-box, which is great for SEO as opposed to a classic React SPA.</p>
+<p>However, at the end of the day I kept thinking: how interactive do I need my blog to be? Does it really require a beefy frontend framework like React?</p>
+<p>I decided to write down what I want out of my blog, which can be summarised to this:</p>
+<ul>
+<li>displays text and images</li>
+<li>loads fast</li>
+<li>accessible</li>
+<li>SEO friendly</li>
+</ul>
+<p>It was suddenly very clear Gatsby and Next.js were not options for me because I realized, </p>
+<blockquote>
+  <p><strong>"I don't need JavaScript for my static blog."</strong></p>
+</blockquote>
+<p>Fortunately, there is a cornucopia of static site generators out there which don't generate JavaScript bundles, such as <strong>Hugo</strong>, <strong>Jekyll</strong>, or <strong>11ty</strong>. I hesitated to use one of these though, because they lock you into their way of doing things. I knew this would hurt my developer performance as I would continually end up drowning in their documentation, trying to figure out how they want me to do things.</p>
+<p>I eventually decided to just create my own static blog build system that was excessively familiar to me. The process I desired:</p>
+<ul>
+<li>I write the blog posts in Markdown</li>
+<li>A build script watches for changes and compiles them into HTML files</li>
+<li>No webpack configuration</li>
+<li>No unfamiliar templating languages (e.g. liquid)</li>
+<li>Only HTML, CSS, and Markdown files</li>
+</ul>
+<p>So that's what I did and below is how you can do it too if you're interested.</p>
+<p>First, in a project directory, create two top-level directories <code>/posts</code> and <code>/templates</code>. The <code>/posts</code> directory will contain the markdown files for each blog post and <code>/templates</code> will contain HTML templates that are used to build the main <code>index.html</code> file and the <code>[name-of-blog-post].html</code> file for each blog post. </p>
+<p>Within <code>/templates</code> we have two templates: <code>indexTemplate.html</code> and <code>blogPostTemplate.html</code>. Both templates contain placeholders for dynamic content to be injected via string replace on build. For example, on build of each blog post, we replace the string <code>{{body_content_do_not_remove}}</code> within <code>blogPostTemplate.html</code> with the blog post Markdown that we'll convert to HTML.</p>
+<p>Within <code>/posts</code> I create the Markdown file for my first blog post. Our structure looks like this so far:</p>
+<pre><code class="hljs">.
+├── posts
+│   └── my-first-blog-post<span class="hljs-selector-class">.md</span>
+└── templates
+    ├── indexTemplate<span class="hljs-selector-class">.html</span>
+    └── blogPostTemplate<span class="hljs-selector-class">.html</span>
+</code></pre>
+<p>Now let's create another top-level directory called <code>public</code>. This is where we will build our html files to, as well as serve any fonts and images from.</p>
+<p>Using git, let's create a <code>package.json</code> file in our project directory with <code>yarn init -y</code>.</p>
+<p>Now let's install some dev dependcies that we'll need for our build system: <code>yarn add live-server front-matter nodemon prettier --dev</code>.</p>
+<ul>
+<li><code>live-server</code> will watch our files for changes and refresh the localhost page.</li>
+<li><code>front-matter</code> will allow us to add information to each Markdown file that we can read and build into our html files, including <code>title</code>, <code>description</code>, and <code>publishedDate</code></li>
+<li><code>nodemon</code> will be used to watch our Markdown files for changes so it can automatically run the build script.</li>
+<li><code>prettier</code> for consistent code formatting (optional) </li>
+</ul>
+<pre><code class="hljs">.
+├── posts
+│   └── my-first-blog-post<span class="hljs-selector-class">.md</span>
+├── public
+├── templates
+│   ├── indexTemplate<span class="hljs-selector-class">.html</span>
+│   └── blogPostTemplate<span class="hljs-selector-class">.html</span>
+└── package<span class="hljs-selector-class">.json</span>
+</code></pre>
+<p>Great. Now let's create a <code>build.js</code> file that we'll run whenever we change a Markdown file in <code>/posts</code>.</p>
+<p>What <code>build.js</code> will do is:</p>
+<ul>
+<li>Read all the Markdown files in <code>/posts</code> </li>
+<li>Get the frontmatter data from each Markdown file and inject that data into the template </li>
+<li>Use frontmatter <code>title</code> and <code>description</code> to create the value for the <code>&lt;title&gt;</code> and <code>&lt;meta name="Description"&gt;</code> tags</li>
+<li>Use frontmatter <code>publishedDate</code> to inject a <code>Published by: [date]</code> text under the title of the blog post</li>
+<li>Write the resulting html to <code>public/[name-of-blog-post]/index.html</code></li>
+<li>For the homepage, add an <code>&lt;a href="${/name-of-blog-post}"&gt;...&lt;/a&gt;</code> containing the <code>title</code> and <code>description</code> of each blog post, sorted by <code>publishedDate</code></li>
+<li>Write the resulting html to <code>public/index.html</code> to create a homepage containing a directory of blog posts, sorted by latest. </li>
+</ul>
+<p>Let's add the scripts we'll need to run to <code>package.json</code></p>
+<pre><code class="hljs"><span class="hljs-string">&quot;scripts&quot;</span>: {
+  <span class="hljs-string">&quot;watch&quot;</span>: <span class="hljs-string">&quot;nodemon --watch posts --watch templates build.js&quot;</span>,
+  <span class="hljs-string">&quot;start&quot;</span>: <span class="hljs-string">&quot;live-server --open=public --ignore=node_modules&quot;</span>,
+}
+</code></pre>
+<p>When working on a blog entry, we'll make sure to run <code>yarn watch</code> in a terminal window and <code>yarn start</code> in another.</p>
+<p><code>yarn watch</code> will watch for changes in the <code>/posts</code> and <code>/templates</code> directory and re-run the <code>build.js</code> script.</p>
+<p><code>yarn start</code> will watch for changes in all files except the <code>node_modules</code> directory and update the page in the browser.</p>
+<p>When we run <code>yarn watch</code> for the first time we'll get this:</p>
+<pre><code class="hljs">.
+├── build<span class="hljs-selector-class">.js</span>
+├── posts
+│   └── my-first-blog-post<span class="hljs-selector-class">.md</span>
+├── public
+│   ├── index<span class="hljs-selector-class">.html</span>
+│   ├── my-first-blog-post
+│   │   └── index<span class="hljs-selector-class">.html</span>
+│   └── 
+├── templates
+│   ├── indexTemplate<span class="hljs-selector-class">.html</span>
+│   └── blogPostTemplate<span class="hljs-selector-class">.html</span>
+└── package<span class="hljs-selector-class">.json</span>
+</code></pre>
+<!-- ```
+# build.js
+# posts
+## my-first-blog-post.md
+# public
+## index.html
+## my-first-blog-post
+### index.html
+## 
+# templates
+## indexTemplate.html
+## blogPostTemplate.html
+# package.json
+``` -->
+<p>And there we have it. The basic structure to our static blog build system. You can check out the code for <code>build.js</code> and the other files on <a href="https://github.com/sdennett55/dev_blog" rel="noopener noreferrer" target="_blank">my github</a> to see the final structure. Keep in mind it needs some refactoring. Also, note that the <code>/docs</code> directory in that repo is acting as our <code>/public</code> folder.</p>
+<p>Thanks for reading!</p>
+    </main>
+  </div>
+  <footer>
+    <p>Blog by <a class="Footer-link" href="https://twitter.com/Wolfmans55" target="_blank"
+        rel="noopener noreferrer"><strong>@Wolfmans55</strong></a><a href="https://github.com/sdennett55"
+        target="_blank" rel="noopener noreferrer" class="Footer-link Footer-link--icon">
+        <svg class="Footer-icon" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
+          <title>sdennett55's github</title>
+          <path
+            d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z" />
+        </svg>
+      </a></p>
+  </footer>
+  <script> </script>
+</body>
+
+</html>
