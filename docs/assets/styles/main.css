@@ -31,13 +31,13 @@
   --lineHeight: 1.4;
 }
 
-::-moz-selection { 
+::-moz-selection {
   background-color: var(--neonBlue);
   color: var(--gray);
 }
-::selection { 
+::selection {
   background-color: var(--neonBlue);
-  color: var(--gray); 
+  color: var(--gray);
 }
 
 html {
@@ -51,13 +51,13 @@ body {
   margin: 0 auto;
   background-color: var(--gray);
   color: var(--white);
-  font-size: 1.5em;
   font-family: 'rubik', sans-serif;
   overflow-y: scroll;
   min-height: 100%;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   overflow-x: hidden;
+  word-break: break-word;
 }
 
 .MainContent {
@@ -102,6 +102,7 @@ header {
   will-change: transform;
   backface-visibility: hidden;
   color: inherit;
+  font-size: 1.5em;
 }
 
 @media (min-width: 480px) {
@@ -178,6 +179,12 @@ main {
   justify-content: center;
   max-width: 1000px;
   margin: 0 auto 4em;
+  font-size: 1em;
+}
+@media (min-width: 480px) {
+  main {
+    font-size: 1.5em;
+  }
 }
 main li {
   line-height: var(--lineHeight);
@@ -185,12 +192,12 @@ main li {
   list-style: none;
 }
 main li::before {
-  content: "\2022";  
-  color: var(--blue); 
-  font-weight: bold; 
+  content: "\2022";
+  color: var(--blue);
+  font-weight: bold;
   display: inline-block;
-  width: 1em; 
-  margin-left: -1em; 
+  width: 1em;
+  margin-left: -1em;
 }
 main h1 {
   line-height: 1;
@@ -294,6 +301,7 @@ pre {
   display: inline-flex;
   margin: 1em 0;
   max-width: 100%;
+  white-space: pre-wrap;
 }
 .hljs-comment,
 .hljs-quote {
