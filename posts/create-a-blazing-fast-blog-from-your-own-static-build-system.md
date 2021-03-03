@@ -1,10 +1,10 @@
 ---
-title: Create a blazing fast static blog and build system
+title: Create a blazing fast blog from your own static build system
 description: Learn how to create a static site generator for optimal page and developer performance.
 publishedDate: 3/2/2021
 ---
 
-# Create a blazing fast static blog and build system
+# Create a blazing fast blog from your own static build system
 
 Recently, I made my very first blog. It's this one actually, **Frontend Performance**! 🎉
 
@@ -137,5 +137,7 @@ When we run `yarn watch` for the first time we'll get this:
 ``` -->
 
 And there we have it. The basic structure to our static blog build system. You can check out the code for `build.js` and the other files on [my github](https://github.com/sdennett55/dev_blog) to see the final structure. Keep in mind it needs some refactoring. Also, note that the `/docs` directory in that repo is acting as our `/public` folder.
+
+In case you're wondering, I'm serving the site from **Netlify** which gets any web app or site up and running in no time. However, note that Netlify **does not cache static assets by default** so make sure to add a [_headers file](https://github.com/sdennett55/dev_blog/blob/main/docs/_headers) with some `Cache-Control` headers to your `/public` directory
 
 Thanks for reading!
