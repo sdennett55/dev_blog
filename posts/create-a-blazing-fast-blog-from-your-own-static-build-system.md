@@ -97,7 +97,7 @@ Let's add the scripts we'll need to run to `package.json`
 ```
 "scripts": {
   "watch": "nodemon --watch posts --watch templates build.js",
-  "start": "live-server --open=public --ignore=node_modules",
+  "start": "live-server --open=public --ignore=node_modules .",
 }
 ```
 
@@ -125,8 +125,8 @@ When we run `yarn watch` for the first time we'll get this:
 └── package.json
 ```
 
-And there we have it. The basic structure to our static blog build system. You can check out the code for `build.js` and the other files on [my github](https://github.com/sdennett55/dev_blog) to see the final structure. Keep in mind it needs some refactoring. Also, note that the `/docs` directory in that repo is acting as our `/public` folder.
+And there we have it. The basic structure to our static blog build system. You can check out the code for `build.js` and the other files on [my github](https://github.com/sdennett55/dev_blog) to see the final structure. Keep in mind it needs some refactoring.
 
-In case you're wondering, I'm serving the site from **Netlify** which gets any web app or site up and running in no time. However, note that Netlify **does not cache static assets by default** so make sure to add a [_headers file](https://github.com/sdennett55/dev_blog/blob/main/docs/_headers) with some `Cache-Control` headers to your `/public` directory
+In case you're wondering, I'm serving the site from **Netlify** which gets any web app or site up and running in no time. However, note that Netlify **does not cache static assets by default** so make sure to add a [_headers file](https://github.com/sdennett55/dev_blog/blob/main/public/_headers) with some `Cache-Control` headers to your `/public` directory
 
 Thanks for reading!

@@ -39,12 +39,12 @@ function markdownToHTML() {
 
         await removeExistingDirsFromPublic();
 
-        fs.mkdir(`docs/${filenameNoExt}`, err => {
+        fs.mkdir(`public/${filenameNoExt}`, err => {
           if (err) {
             return console.error(`There was an error creating the directory for the blogpost ${filenameNoExt}`, err);
           }
 
-          fs.writeFile(`docs/${filenameNoExt}/index.html`, injectContent('templates/blogPostTemplate.html', {body: bodyContent, header, meta}), err => {
+          fs.writeFile(`public/${filenameNoExt}/index.html`, injectContent('templates/blogPostTemplate.html', {body: bodyContent, header, meta}), err => {
             if (err) {
               console.error(`There was an error writing to ${filenameNoExt}.html`, err);
             }
@@ -57,15 +57,15 @@ function markdownToHTML() {
 
 async function removeExistingDirsFromPublic() {
   const promises = [];
-  const dirs = await fsPromises.readdir('docs');
+  const dirs = await fsPromises.readdir('public');
 
   dirs.forEach(dir => {
     if (dir === 'assets' || dir === 'site.webmanifest' || dir === '_headers') {
       return;
     }
-    const rmPromise = fsPromises.rmdir(`docs/${dir}`, { recursive: true }, err => {
+    const rmPromise = fsPromises.rmdir(`public/${dir}`, { recursive: true }, err => {
       if (err) {
-        return console.error(`There was an error removing ${dir} directory from docs`, err);
+        return console.error(`There was an error removing ${dir} directory from public`, err);
       }
     });
 
@@ -94,7 +94,7 @@ async function init() {
 
 
   const body = Object.values(sortedPostsData).map(({ title, description, filename }) => {
-    const path = process.env.SITE_ENV === 'production' ? `/${filename}` : `/docs/${filename}`
+    const path = process.env.SITE_ENV === 'production' ? `/${filename}` : `/public/${filename}`
     return `
       <li>
         <a href="${path}">
@@ -108,7 +108,7 @@ async function init() {
   const header = await fsPromises.readFile('templates/headerTemplate.html', 'utf8');
 
   // Add content to main index.html file
-  fs.writeFile(`docs/index.html`, injectContent('templates/indexTemplate.html', {body, header}), err => {
+  fs.writeFile(`public/index.html`, injectContent('templates/indexTemplate.html', {body, header}), err => {
     if (err) {
       console.error(`There was an error writing to ${filenameNoExt}.html`, err);
     }
