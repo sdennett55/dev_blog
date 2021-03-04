@@ -45,10 +45,11 @@
 </ul>
 <p>It was suddenly very clear Gatsby and Next.js were not options for me because I realized, </p>
 <blockquote>
-  <p><strong>"I don't need JavaScript for my static blog."</strong></p>
+  <p><strong>"I don't need JavaScript for a static blog."</strong></p>
 </blockquote>
-<p>Fortunately, there is a cornucopia of static site generators out there which don't generate JavaScript bundles, such as <strong>Hugo</strong>, <strong>Jekyll</strong>, or <strong>11ty</strong>. I hesitated to use one of these though, because they lock you into their way of doing things. I knew this would hurt my developer performance as I would continually end up drowning in their documentation, looking up obscure error messages on various messaging boards, trying to figure out how they want me to do things.</p>
-<p>I eventually decided to just create my own static blog build system, that way it was excessively familiar to me. The process I desired:</p>
+<p>What's more performant than a blog that has to request, parse and execute <code>0kb</code> of JavaScript?</p>
+<p>Fortunately there is a cornucopia of static site generators out there which don't generate JavaScript bundles, such as <strong>Hugo</strong>, <strong>Jekyll</strong>, or <strong>11ty</strong>. I hesitated to use one of these though, because they lock you into their way of doing things. I knew this would hurt my developer performance as I would continually end up drowning in their documentation, looking up obscure error messages on various messaging boards, trying to figure out how they want me to do things.</p>
+<p>I eventually decided to just create my own static blog build system, that way I could make it simple and familiar, and add more features as I go if I see fit. It's also a good learning experience, right? The process I desired:</p>
 <ul>
 <li>I write the blog posts in Markdown</li>
 <li>A build script watches for changes and compiles them into HTML files</li>
@@ -56,7 +57,7 @@
 <li>No unfamiliar templating languages (e.g. liquid)</li>
 <li>Only HTML, CSS, and Markdown files</li>
 </ul>
-<p>So that's what I did and below is how you can do it too if you're interested. Please note that this won't be an exhaustive tutorial, but rather a primer on the fundamentals of this setup. Feel free to poke around files on the <a href="https://github.com/sdennett55/dev_blog" rel="noopener noreferrer" target="_blank">github repo</a>.</p>
+<p>So that's what I did and below is how you can do it too if you're interested. Please note that this won't be an exhaustive tutorial, but rather a primer on the fundamentals of this setup. Feel free to poke around the files on the <a href="https://github.com/sdennett55/dev_blog" rel="noopener noreferrer" target="_blank">github repo</a>.</p>
 <p>First, in a project directory, create two top-level directories <code>/posts</code> and <code>/templates</code>. The <code>/posts</code> directory will contain the markdown files for each blog post and <code>/templates</code> will contain HTML templates that are used to build the main <code>index.html</code> file and the <code>[name-of-blog-post].html</code> file for each blog post. </p>
 <p>Within <code>/templates</code> we have two templates: <code>indexTemplate.html</code> and <code>blogPostTemplate.html</code>. Both templates contain placeholders for dynamic content to be injected via string replace on build. For example, on build of each blog post, we replace the string <code>{{body_content_do_not_remove}}</code> within <code>blogPostTemplate.html</code> with the blog post Markdown that we'll convert to HTML.</p>
 <p>Within <code>/posts</code> I create the Markdown file for my first blog post. Our structure looks like this so far:</p>
@@ -67,13 +68,13 @@
     ├── indexTemplate<span class="hljs-selector-class">.html</span>
     └── blogPostTemplate<span class="hljs-selector-class">.html</span>
 </code></pre>
-<p>Now let's create another top-level directory called <code>public</code>. This is where we will build our html files to, as well as serve any fonts and images from.</p>
+<p>Now let's create another top-level directory called <code>public</code>. This is where we will build our HTML files to, as well as serve any fonts and images from.</p>
 <p>Using git, let's create a <code>package.json</code> file in our project directory with <code>yarn init -y</code>.</p>
 <p>Now let's install some dev dependencies that we'll need for our build system: <code>yarn add [each-dep-below] --dev</code>.</p>
 <ul>
 <li><code>live-server</code> will watch our files for changes and refresh the localhost page.</li>
-<li><code>front-matter</code> will allow us to add information to each Markdown file that we can read and build into our html files, including <code>title</code>, <code>description</code>, and <code>publishedDate</code></li>
-<li><code>showdown</code> allows us to convert markdown to HTML</li>
+<li><code>front-matter</code> will allow us to add information to each Markdown file that we can read and build into our HTML files, including <code>title</code>, <code>description</code>, and <code>publishedDate</code></li>
+<li><code>showdown</code> allows us to convert Markdown to HTML</li>
 <li><code>showdown-highlight</code> allows us to style code blocks</li>
 <li><code>nodemon</code> will be used to watch our Markdown files for changes so it can automatically run the build script.</li>
 <li><code>prettier</code> for consistent code formatting (optional) </li>
@@ -94,9 +95,9 @@
 <li>Get the frontmatter data from each Markdown file and inject that data into the template </li>
 <li>Use frontmatter <code>title</code> and <code>description</code> to create the value for the <code>&lt;title&gt;</code> and <code>&lt;meta name="Description"&gt;</code> tags</li>
 <li>Use frontmatter <code>publishedDate</code> to inject a <code>Published by: [date]</code> text under the title of the blog post</li>
-<li>Write the resulting html to <code>public/[name-of-blog-post]/index.html</code></li>
+<li>Write the resulting HTML to <code>public/[name-of-blog-post]/index.html</code></li>
 <li>For the homepage, add an <code>&lt;a href="${/name-of-blog-post}"&gt;...&lt;/a&gt;</code> containing the <code>title</code> and <code>description</code> of each blog post, sorted by <code>publishedDate</code></li>
-<li>Write the resulting html to <code>public/index.html</code> to create a homepage containing a directory of blog posts, sorted by latest. </li>
+<li>Write the resulting HTML to <code>public/index.html</code> to create a homepage containing a directory of blog posts, sorted by latest. </li>
 </ul>
 <p>Let's add the scripts we'll need to run to <code>package.json</code></p>
 <pre><code class="hljs"><span class="hljs-string">&quot;scripts&quot;</span>: {
@@ -122,20 +123,6 @@
 │   └── blogPostTemplate<span class="hljs-selector-class">.html</span>
 └── package<span class="hljs-selector-class">.json</span>
 </code></pre>
-<!-- ```
-# build.js
-# posts
-## my-first-blog-post.md
-# public
-## index.html
-## my-first-blog-post
-### index.html
-## 
-# templates
-## indexTemplate.html
-## blogPostTemplate.html
-# package.json
-``` -->
 <p>And there we have it. The basic structure to our static blog build system. You can check out the code for <code>build.js</code> and the other files on <a href="https://github.com/sdennett55/dev_blog" rel="noopener noreferrer" target="_blank">my github</a> to see the final structure. Keep in mind it needs some refactoring. Also, note that the <code>/docs</code> directory in that repo is acting as our <code>/public</code> folder.</p>
 <p>In case you're wondering, I'm serving the site from <strong>Netlify</strong> which gets any web app or site up and running in no time. However, note that Netlify <strong>does not cache static assets by default</strong> so make sure to add a <a href="https://github.com/sdennett55/dev_blog/blob/main/docs/_headers" rel="noopener noreferrer" target="_blank">_headers file</a> with some <code>Cache-Control</code> headers to your <code>/public</code> directory</p>
 <p>Thanks for reading!</p>
