@@ -16,7 +16,7 @@ Those in the React community like myself might be familiar with the frameworks *
 
 However, at the end of the day I kept thinking: how interactive do I need my blog to be? Does it really require a beefy frontend framework like React?
 
-I decided to write down what I want out of my blog, which can be summarised to this:
+I decided to write down what I wanted out of my blog, which can be summarised to this:
 
 - displays text and images
 - loads fast
@@ -27,9 +27,9 @@ It was suddenly very clear Gatsby and Next.js were not options for me because I 
 
 > **"I don't need JavaScript for my static blog."**
 
-Fortunately, there is a cornucopia of static site generators out there which don't generate JavaScript bundles, such as **Hugo**, **Jekyll**, or **11ty**. I hesitated to use one of these though, because they lock you into their way of doing things. I knew this would hurt my developer performance as I would continually end up drowning in their documentation, trying to figure out how they want me to do things.
+Fortunately, there is a cornucopia of static site generators out there which don't generate JavaScript bundles, such as **Hugo**, **Jekyll**, or **11ty**. I hesitated to use one of these though, because they lock you into their way of doing things. I knew this would hurt my developer performance as I would continually end up drowning in their documentation, looking up obscure error messages on various messaging boards, trying to figure out how they want me to do things.
 
-I eventually decided to just create my own static blog build system that was excessively familiar to me. The process I desired:
+I eventually decided to just create my own static blog build system, that way it was excessively familiar to me. The process I desired:
 
 - I write the blog posts in Markdown
 - A build script watches for changes and compiles them into HTML files
@@ -37,7 +37,7 @@ I eventually decided to just create my own static blog build system that was exc
 - No unfamiliar templating languages (e.g. liquid)
 - Only HTML, CSS, and Markdown files
 
-So that's what I did and below is how you can do it too if you're interested.
+So that's what I did and below is how you can do it too if you're interested. Please note that this won't be an exhaustive tutorial, but rather a primer on the fundamentals of this setup. Feel free to poke around files on the [github repo](https://github.com/sdennett55/dev_blog).
 
 First, in a project directory, create two top-level directories `/posts` and `/templates`. The `/posts` directory will contain the markdown files for each blog post and `/templates` will contain HTML templates that are used to build the main `index.html` file and the `[name-of-blog-post].html` file for each blog post. 
 
@@ -58,10 +58,12 @@ Now let's create another top-level directory called `public`. This is where we w
 
 Using git, let's create a `package.json` file in our project directory with `yarn init -y`.
 
-Now let's install some dev dependcies that we'll need for our build system: `yarn add live-server front-matter nodemon prettier --dev`.
+Now let's install some dev dependencies that we'll need for our build system: `yarn add [each-dep-below] --dev`.
 
 - `live-server` will watch our files for changes and refresh the localhost page.
 - `front-matter` will allow us to add information to each Markdown file that we can read and build into our html files, including `title`, `description`, and `publishedDate`
+- `showdown` allows us to convert markdown to HTML
+- `showdown-highlight` allows us to style code blocks
 - `nodemon` will be used to watch our Markdown files for changes so it can automatically run the build script.
 - `prettier` for consistent code formatting (optional) 
 

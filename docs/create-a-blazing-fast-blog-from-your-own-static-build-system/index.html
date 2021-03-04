@@ -36,7 +36,7 @@
 <p>Before I embarked on my 2-day journey to create my own static build system to generate this blog, I of course considered using an existing blog framework or static site generator.</p>
 <p>Those in the React community like myself might be familiar with the frameworks <strong>Gatsby</strong> and <strong>Next.js</strong> as viable options for a blog. They handle server-side rendering out-of-the-box, which is great for SEO as opposed to a classic React SPA.</p>
 <p>However, at the end of the day I kept thinking: how interactive do I need my blog to be? Does it really require a beefy frontend framework like React?</p>
-<p>I decided to write down what I want out of my blog, which can be summarised to this:</p>
+<p>I decided to write down what I wanted out of my blog, which can be summarised to this:</p>
 <ul>
 <li>displays text and images</li>
 <li>loads fast</li>
@@ -47,8 +47,8 @@
 <blockquote>
   <p><strong>"I don't need JavaScript for my static blog."</strong></p>
 </blockquote>
-<p>Fortunately, there is a cornucopia of static site generators out there which don't generate JavaScript bundles, such as <strong>Hugo</strong>, <strong>Jekyll</strong>, or <strong>11ty</strong>. I hesitated to use one of these though, because they lock you into their way of doing things. I knew this would hurt my developer performance as I would continually end up drowning in their documentation, trying to figure out how they want me to do things.</p>
-<p>I eventually decided to just create my own static blog build system that was excessively familiar to me. The process I desired:</p>
+<p>Fortunately, there is a cornucopia of static site generators out there which don't generate JavaScript bundles, such as <strong>Hugo</strong>, <strong>Jekyll</strong>, or <strong>11ty</strong>. I hesitated to use one of these though, because they lock you into their way of doing things. I knew this would hurt my developer performance as I would continually end up drowning in their documentation, looking up obscure error messages on various messaging boards, trying to figure out how they want me to do things.</p>
+<p>I eventually decided to just create my own static blog build system, that way it was excessively familiar to me. The process I desired:</p>
 <ul>
 <li>I write the blog posts in Markdown</li>
 <li>A build script watches for changes and compiles them into HTML files</li>
@@ -56,7 +56,7 @@
 <li>No unfamiliar templating languages (e.g. liquid)</li>
 <li>Only HTML, CSS, and Markdown files</li>
 </ul>
-<p>So that's what I did and below is how you can do it too if you're interested.</p>
+<p>So that's what I did and below is how you can do it too if you're interested. Please note that this won't be an exhaustive tutorial, but rather a primer on the fundamentals of this setup. Feel free to poke around files on the <a href="https://github.com/sdennett55/dev_blog" rel="noopener noreferrer" target="_blank">github repo</a>.</p>
 <p>First, in a project directory, create two top-level directories <code>/posts</code> and <code>/templates</code>. The <code>/posts</code> directory will contain the markdown files for each blog post and <code>/templates</code> will contain HTML templates that are used to build the main <code>index.html</code> file and the <code>[name-of-blog-post].html</code> file for each blog post. </p>
 <p>Within <code>/templates</code> we have two templates: <code>indexTemplate.html</code> and <code>blogPostTemplate.html</code>. Both templates contain placeholders for dynamic content to be injected via string replace on build. For example, on build of each blog post, we replace the string <code>{{body_content_do_not_remove}}</code> within <code>blogPostTemplate.html</code> with the blog post Markdown that we'll convert to HTML.</p>
 <p>Within <code>/posts</code> I create the Markdown file for my first blog post. Our structure looks like this so far:</p>
@@ -69,10 +69,12 @@
 </code></pre>
 <p>Now let's create another top-level directory called <code>public</code>. This is where we will build our html files to, as well as serve any fonts and images from.</p>
 <p>Using git, let's create a <code>package.json</code> file in our project directory with <code>yarn init -y</code>.</p>
-<p>Now let's install some dev dependcies that we'll need for our build system: <code>yarn add live-server front-matter nodemon prettier --dev</code>.</p>
+<p>Now let's install some dev dependencies that we'll need for our build system: <code>yarn add [each-dep-below] --dev</code>.</p>
 <ul>
 <li><code>live-server</code> will watch our files for changes and refresh the localhost page.</li>
 <li><code>front-matter</code> will allow us to add information to each Markdown file that we can read and build into our html files, including <code>title</code>, <code>description</code>, and <code>publishedDate</code></li>
+<li><code>showdown</code> allows us to convert markdown to HTML</li>
+<li><code>showdown-highlight</code> allows us to style code blocks</li>
 <li><code>nodemon</code> will be used to watch our Markdown files for changes so it can automatically run the build script.</li>
 <li><code>prettier</code> for consistent code formatting (optional) </li>
 </ul>
