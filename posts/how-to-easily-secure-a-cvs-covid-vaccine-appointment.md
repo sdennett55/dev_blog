@@ -32,7 +32,7 @@ This bookmark will select the first available time for the first dose by default
 
 Please note that **the CVS website only allows a single user to check for availability 270 times** before they serve you a "Technical difficulties" error. Once your reach this error, you won't be able to keep checking availability for several hours. If you weren't able to secure an appointment, try this process again in another browser or on a different device.
 
-Also note that by default, the CVS website checks for availability **up to 35 miles of the given zip code**. Sometimes you may get a result that you're not willing or capable to travel to.
+Also note that by default, the CVS website checks for availability **up to 35 miles from the given zip code**. Sometimes you may get a result that you're not willing or capable to travel to.
 
 ## Other tips
 
