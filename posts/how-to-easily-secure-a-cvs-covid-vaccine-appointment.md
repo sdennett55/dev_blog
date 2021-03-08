@@ -14,7 +14,7 @@ Incredibly, the process on the CVS website is still much better and more intuiti
 
 Fortunately for CVS customers, there is a solution for even non-techies to **allow the CVS website to keep searching for vaccine availability for you** without you having to manually refresh the page and click on any buttons yourself. This technique should only be attempted during the normal working hours of your local CVS stores. Using a desktop or tablet device is also easier than attempting this on mobile.
 
-## Steps to enable automatic searching of vaccine availability
+## Steps to enable automatic searching of vaccine appointment availability
 
 1. Go to the <a href="https://www.cvs.com/vaccine/intake/store/cvd-schedule?icid=coronavirus-lp-vaccine-al-statetool" target="_blank" rel="noopener noreferrer">schedule an appointment page on CVS.com</a> and fill out the survey
 2. Once you reach the "Schedule dose" page, enter your zip code, but don't search yet
