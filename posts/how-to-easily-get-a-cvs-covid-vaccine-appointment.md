@@ -6,6 +6,8 @@ publishedDate: 3/7/2021
 
 # How to easily secure a CVS COVID-19 vaccine appointment
 
+Normally, this blog is targetted to web developers, but besides the very last blurb, this particular post is for a general audience.
+
 A lot of Americans have learned that securing a COVID-19 vaccine appointment has been **tough**...to put it lightly. Every time you think you finally found some availability, it's already gone in seconds or sometimes milliseconds before you can book it. You can easily spend hours refreshing the page and waiting for your chance to strike and never hit gold. It's wildly infuriating, and what's worse is peoples' lives are at stake!
 
 Incredibly, the process on the CVS website is still much better and more intuitive than most if not all of the existing government websites for booking vaccine appointments.
