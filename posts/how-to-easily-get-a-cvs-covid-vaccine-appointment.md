@@ -12,7 +12,7 @@ A lot of Americans have learned that securing a COVID-19 vaccine appointment has
 
 Incredibly, the process on the CVS website is still much better and more intuitive than most if not all of the existing government websites for booking vaccine appointments.
 
-Fortunately for CVS customers, there is a solution for even non-techies to **allow the CVS website to keep searching for vaccine availability for you** without you having to manually refresh the page and click on any buttons yourself.
+Fortunately for CVS customers, there is a solution for even non-techies to **allow the CVS website to keep searching for vaccine availability for you** without you having to manually refresh the page and click on any buttons yourself. This technique should only be attempted during the normal working hours of your local CVS stores. Using a desktop or tablet device is also easier than attempting this on mobile.
 
 ## Steps to enable automatic searching of vaccine availability
 
@@ -31,6 +31,8 @@ This bookmark will select the first available time for the first dose by default
 ## Gotchas
 
 Please note that **the CVS website only allows a single user to check for availability 270 times** before they serve you a "Technical difficulties" error. Once your reach this error, you won't be able to keep checking availability for several hours. If you weren't able to secure an appointment before reaching this page, try this process again in another browser or device.
+
+Also note that by default, the CVS website checks for availability **up to 35 miles of the given zip code**. Sometimes you may get a result that you're not willing or capable to travel to.
 
 ## Other tips
 
