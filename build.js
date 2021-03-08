@@ -19,24 +19,24 @@ function markdownToHTML() {
     filenames.forEach(filename => {
       fs.readFile(`posts/${filename}`, 'utf8', async (err, data) => {
         const { body, attributes: {title, description, publishedDate} } = fm(data);
-
+        
         if (err) {
           return console.error(`There was an issue reading the file: ${filename}`, err);
         }
-
+        
         const filenameNoExt = filename.split('.')[0];
         const bodyContent = converter.makeHtml(body).replace(`</h1>`, `</h1><p><em>Published on ${formatDate(publishedDate)}.</em></p>`);
-
+        
         const header = await fsPromises.readFile('templates/headerTemplate.html', 'utf8');
-
+        
         const meta = `
-          <title>${title}</title>
-          <meta name="Description" content="${description}">
-          <meta property="og:title" content="${title}">
-          <meta property="og:description" content="${description}">
-          <meta property="og:url" content="https://frontendperformance.tech/${filenameNoExt}">
+        <title>${title}</title>
+        <meta name="Description" content="${description}">
+        <meta property="og:title" content="${title}">
+        <meta property="og:description" content="${description}">
+        <meta property="og:url" content="https://frontendperformance.tech/${filenameNoExt}">
         `;
-
+      
         await removeExistingDirsFromPublic();
 
         fs.mkdir(`public/${filenameNoExt}`, err => {
@@ -84,14 +84,12 @@ async function init() {
 
   // get last numOfBlogPosts including: title, description, thumbnail of each based on posted date.
   const posts = await fsPromises.readdir('posts');
-
+  
   const sortedPosts = await getFrontMatterData(posts);
 
   const sortedPostsData = Object.entries(sortedPosts).sort((a, b) => {
     return new Date(a[0]) < new Date(b[0]) ? 1 : -1;
   }).slice(0, numOfBlogPosts).map(x => x[1]);
-
-
 
   const body = Object.values(sortedPostsData).map(({ title, description, filename }) => {
     const path = process.env.SITE_ENV === 'production' ? `/${filename}` : `/public/${filename}`

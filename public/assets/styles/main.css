@@ -190,9 +190,11 @@ main {
 main li {
   line-height: var(--lineHeight);
   margin-bottom: .5em;
-  list-style: none;
 }
-main li::before {
+main ul li {
+ list-style: none;
+}
+main ul li::before {
   content: "\2022";
   color: var(--blue);
   font-weight: bold;
