@@ -1,6 +1,6 @@
 ---
 title: How to easily secure a CVS COVID-19 vaccine appointment
-description: Easily secure a CVS COVID-19 vaccine appointment automatically with the press of a button.
+description: Easily secure a CVS COVID-19 vaccine appointment with the press of a button.
 publishedDate: 3/7/2021
 ---
 
